@@ -1,0 +1,2678 @@
+type Article implements Node {
+  """Reads a single `BookResource` that is related to this `Article`."""
+  bookResourceById: BookResource
+  id: Int!
+  ndl: String
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  page: Int!
+  pages: String!
+
+  """Reads a single `SerialNumber` that is related to this `Article`."""
+  serialNumberBySerialNumberId: SerialNumber
+  serialNumberId: Int!
+  subjoinder: String!
+  title: String!
+}
+
+"""
+A condition to be used against `Article` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input ArticleCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `ndl` field."""
+  ndl: String
+
+  """Checks for equality with the object’s `page` field."""
+  page: Int
+
+  """Checks for equality with the object’s `pages` field."""
+  pages: String
+
+  """Checks for equality with the object’s `serialNumberId` field."""
+  serialNumberId: Int
+
+  """Checks for equality with the object’s `subjoinder` field."""
+  subjoinder: String
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+}
+
+"""An input for mutations affecting `Article`"""
+input ArticleInput {
+  id: Int!
+  ndl: String
+  page: Int!
+  pages: String
+  serialNumberId: Int!
+  subjoinder: String
+  title: String
+}
+
+"""
+Represents an update to a `Article`. Fields that are set will be updated.
+"""
+input ArticlePatch {
+  id: Int
+  ndl: String
+  page: Int
+  pages: String
+  serialNumberId: Int
+  subjoinder: String
+  title: String
+}
+
+"""A connection to a list of `Article` values."""
+type ArticlesConnection {
+  """
+  A list of edges which contains the `Article` and cursor to aid in pagination.
+  """
+  edges: [ArticlesEdge!]!
+
+  """A list of `Article` objects."""
+  nodes: [Article]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Article` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Article` edge in the connection."""
+type ArticlesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Article` at the end of the edge."""
+  node: Article
+}
+
+"""Methods to use when ordering `Article`."""
+enum ArticlesOrderBy {
+  ID_ASC
+  ID_DESC
+  NATURAL
+  NDL_ASC
+  NDL_DESC
+  PAGES_ASC
+  PAGES_DESC
+  PAGE_ASC
+  PAGE_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  SERIAL_NUMBER_ID_ASC
+  SERIAL_NUMBER_ID_DESC
+  SUBJOINDER_ASC
+  SUBJOINDER_DESC
+  TITLE_ASC
+  TITLE_DESC
+}
+
+type Author implements Node {
+  """Reads a single `BookResource` that is related to this `Author`."""
+  bookResourceById: BookResource
+  id: Int!
+  name: String!
+  nameTranscription: String!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  order: Int!
+  subjoinder: String!
+  title: String!
+  type: String!
+}
+
+"""
+A condition to be used against `Author` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input AuthorCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
+  """Checks for equality with the object’s `nameTranscription` field."""
+  nameTranscription: String
+
+  """Checks for equality with the object’s `order` field."""
+  order: Int
+
+  """Checks for equality with the object’s `subjoinder` field."""
+  subjoinder: String
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `type` field."""
+  type: String
+}
+
+"""An input for mutations affecting `Author`"""
+input AuthorInput {
+  id: Int!
+  name: String
+  nameTranscription: String
+  order: Int
+  subjoinder: String
+  title: String
+  type: String
+}
+
+"""
+Represents an update to a `Author`. Fields that are set will be updated.
+"""
+input AuthorPatch {
+  id: Int
+  name: String
+  nameTranscription: String
+  order: Int
+  subjoinder: String
+  title: String
+  type: String
+}
+
+"""A connection to a list of `Author` values."""
+type AuthorsConnection {
+  """
+  A list of edges which contains the `Author` and cursor to aid in pagination.
+  """
+  edges: [AuthorsEdge!]!
+
+  """A list of `Author` objects."""
+  nodes: [Author]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Author` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Author` edge in the connection."""
+type AuthorsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Author` at the end of the edge."""
+  node: Author
+}
+
+"""Methods to use when ordering `Author`."""
+enum AuthorsOrderBy {
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  NAME_TRANSCRIPTION_ASC
+  NAME_TRANSCRIPTION_DESC
+  NATURAL
+  ORDER_ASC
+  ORDER_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  SUBJOINDER_ASC
+  SUBJOINDER_DESC
+  TITLE_ASC
+  TITLE_DESC
+  TYPE_ASC
+  TYPE_DESC
+}
+
+type BookResource implements Node {
+  """Reads a single `Article` that is related to this `BookResource`."""
+  articleById: Article
+
+  """Reads and enables pagination through a set of `Author`."""
+  authorsById(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AuthorCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AuthorsConnection!
+
+  """Reads and enables pagination through a set of `Author`."""
+  authorsByIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AuthorCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!]
+  ): [Author!]!
+  id: Int!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads a single `Serial` that is related to this `BookResource`."""
+  serialById: Serial
+
+  """Reads a single `SerialNumber` that is related to this `BookResource`."""
+  serialNumberById: SerialNumber
+
+  """Reads and enables pagination through a set of `TagMap`."""
+  tagMapsByResourceId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TagMapCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `TagMap`."""
+    orderBy: [TagMapsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagMapsConnection!
+
+  """Reads and enables pagination through a set of `TagMap`."""
+  tagMapsByResourceIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TagMapCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `TagMap`."""
+    orderBy: [TagMapsOrderBy!]
+  ): [TagMap!]!
+}
+
+"""
+A condition to be used against `BookResource` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input BookResourceCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+}
+
+"""An input for mutations affecting `BookResource`"""
+input BookResourceInput {
+  id: Int!
+}
+
+"""
+Represents an update to a `BookResource`. Fields that are set will be updated.
+"""
+input BookResourcePatch {
+  id: Int
+}
+
+"""A connection to a list of `BookResource` values."""
+type BookResourcesConnection {
+  """
+  A list of edges which contains the `BookResource` and cursor to aid in pagination.
+  """
+  edges: [BookResourcesEdge!]!
+
+  """A list of `BookResource` objects."""
+  nodes: [BookResource]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `BookResource` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `BookResource` edge in the connection."""
+type BookResourcesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `BookResource` at the end of the edge."""
+  node: BookResource
+}
+
+"""Methods to use when ordering `BookResource`."""
+enum BookResourcesOrderBy {
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""All input for the create `Article` mutation."""
+input CreateArticleInput {
+  """The `Article` to be created by this mutation."""
+  article: ArticleInput!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+}
+
+"""The output of our create `Article` mutation."""
+type CreateArticlePayload {
+  """The `Article` that was created by this mutation."""
+  article: Article
+
+  """An edge for our `Article`. May be used by Relay 1."""
+  articleEdge(
+    """The method to use when ordering `Article`."""
+    orderBy: [ArticlesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ArticlesEdge
+
+  """Reads a single `BookResource` that is related to this `Article`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `SerialNumber` that is related to this `Article`."""
+  serialNumberBySerialNumberId: SerialNumber
+}
+
+"""All input for the create `Author` mutation."""
+input CreateAuthorInput {
+  """The `Author` to be created by this mutation."""
+  author: AuthorInput!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+}
+
+"""The output of our create `Author` mutation."""
+type CreateAuthorPayload {
+  """The `Author` that was created by this mutation."""
+  author: Author
+
+  """An edge for our `Author`. May be used by Relay 1."""
+  authorEdge(
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AuthorsEdge
+
+  """Reads a single `BookResource` that is related to this `Author`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `BookResource` mutation."""
+input CreateBookResourceInput {
+  """The `BookResource` to be created by this mutation."""
+  bookResource: BookResourceInput!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+}
+
+"""The output of our create `BookResource` mutation."""
+type CreateBookResourcePayload {
+  """The `BookResource` that was created by this mutation."""
+  bookResource: BookResource
+
+  """An edge for our `BookResource`. May be used by Relay 1."""
+  bookResourceEdge(
+    """The method to use when ordering `BookResource`."""
+    orderBy: [BookResourcesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BookResourcesEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Serial` mutation."""
+input CreateSerialInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Serial` to be created by this mutation."""
+  serial: SerialInput!
+}
+
+"""All input for the create `SerialNumber` mutation."""
+input CreateSerialNumberInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `SerialNumber` to be created by this mutation."""
+  serialNumber: SerialNumberInput!
+}
+
+"""The output of our create `SerialNumber` mutation."""
+type CreateSerialNumberPayload {
+  """Reads a single `BookResource` that is related to this `SerialNumber`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Serial` that is related to this `SerialNumber`."""
+  serialBySerialId: Serial
+
+  """The `SerialNumber` that was created by this mutation."""
+  serialNumber: SerialNumber
+
+  """An edge for our `SerialNumber`. May be used by Relay 1."""
+  serialNumberEdge(
+    """The method to use when ordering `SerialNumber`."""
+    orderBy: [SerialNumbersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SerialNumbersEdge
+}
+
+"""The output of our create `Serial` mutation."""
+type CreateSerialPayload {
+  """Reads a single `BookResource` that is related to this `Serial`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Serial` that was created by this mutation."""
+  serial: Serial
+
+  """An edge for our `Serial`. May be used by Relay 1."""
+  serialEdge(
+    """The method to use when ordering `Serial`."""
+    orderBy: [SerialsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SerialsEdge
+}
+
+"""All input for the create `Tag` mutation."""
+input CreateTagInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Tag` to be created by this mutation."""
+  tag: TagInput!
+}
+
+"""All input for the create `TagMap` mutation."""
+input CreateTagMapInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `TagMap` to be created by this mutation."""
+  tagMap: TagMapInput!
+}
+
+"""The output of our create `TagMap` mutation."""
+type CreateTagMapPayload {
+  """Reads a single `BookResource` that is related to this `TagMap`."""
+  bookResourceByResourceId: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Tag` that is related to this `TagMap`."""
+  tagByTagId: Tag
+
+  """The `TagMap` that was created by this mutation."""
+  tagMap: TagMap
+
+  """An edge for our `TagMap`. May be used by Relay 1."""
+  tagMapEdge(
+    """The method to use when ordering `TagMap`."""
+    orderBy: [TagMapsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagMapsEdge
+}
+
+"""The output of our create `Tag` mutation."""
+type CreateTagPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Tag` that was created by this mutation."""
+  tag: Tag
+
+  """An edge for our `Tag`. May be used by Relay 1."""
+  tagEdge(
+    """The method to use when ordering `Tag`."""
+    orderBy: [TagsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagsEdge
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""All input for the `deleteArticleById` mutation."""
+input DeleteArticleByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteArticle` mutation."""
+input DeleteArticleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Article` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Article` mutation."""
+type DeleteArticlePayload {
+  """The `Article` that was deleted by this mutation."""
+  article: Article
+
+  """An edge for our `Article`. May be used by Relay 1."""
+  articleEdge(
+    """The method to use when ordering `Article`."""
+    orderBy: [ArticlesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ArticlesEdge
+
+  """Reads a single `BookResource` that is related to this `Article`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedArticleId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `SerialNumber` that is related to this `Article`."""
+  serialNumberBySerialNumberId: SerialNumber
+}
+
+"""All input for the `deleteAuthorByIdAndOrder` mutation."""
+input DeleteAuthorByIdAndOrderInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+  order: Int!
+}
+
+"""All input for the `deleteAuthor` mutation."""
+input DeleteAuthorInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Author` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Author` mutation."""
+type DeleteAuthorPayload {
+  """The `Author` that was deleted by this mutation."""
+  author: Author
+
+  """An edge for our `Author`. May be used by Relay 1."""
+  authorEdge(
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AuthorsEdge
+
+  """Reads a single `BookResource` that is related to this `Author`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedAuthorId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteBookResourceById` mutation."""
+input DeleteBookResourceByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteBookResource` mutation."""
+input DeleteBookResourceInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `BookResource` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `BookResource` mutation."""
+type DeleteBookResourcePayload {
+  """The `BookResource` that was deleted by this mutation."""
+  bookResource: BookResource
+
+  """An edge for our `BookResource`. May be used by Relay 1."""
+  bookResourceEdge(
+    """The method to use when ordering `BookResource`."""
+    orderBy: [BookResourcesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BookResourcesEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedBookResourceId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteSerialById` mutation."""
+input DeleteSerialByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteSerial` mutation."""
+input DeleteSerialInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Serial` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteSerialNumberById` mutation."""
+input DeleteSerialNumberByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteSerialNumber` mutation."""
+input DeleteSerialNumberInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `SerialNumber` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `SerialNumber` mutation."""
+type DeleteSerialNumberPayload {
+  """Reads a single `BookResource` that is related to this `SerialNumber`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedSerialNumberId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Serial` that is related to this `SerialNumber`."""
+  serialBySerialId: Serial
+
+  """The `SerialNumber` that was deleted by this mutation."""
+  serialNumber: SerialNumber
+
+  """An edge for our `SerialNumber`. May be used by Relay 1."""
+  serialNumberEdge(
+    """The method to use when ordering `SerialNumber`."""
+    orderBy: [SerialNumbersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SerialNumbersEdge
+}
+
+"""The output of our delete `Serial` mutation."""
+type DeleteSerialPayload {
+  """Reads a single `BookResource` that is related to this `Serial`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedSerialId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Serial` that was deleted by this mutation."""
+  serial: Serial
+
+  """An edge for our `Serial`. May be used by Relay 1."""
+  serialEdge(
+    """The method to use when ordering `Serial`."""
+    orderBy: [SerialsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SerialsEdge
+}
+
+"""All input for the `deleteTagById` mutation."""
+input DeleteTagByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteTag` mutation."""
+input DeleteTagInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Tag` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteTagMapByResourceIdAndTagId` mutation."""
+input DeleteTagMapByResourceIdAndTagIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  resourceId: Int!
+  tagId: Int!
+}
+
+"""All input for the `deleteTagMap` mutation."""
+input DeleteTagMapInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `TagMap` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `TagMap` mutation."""
+type DeleteTagMapPayload {
+  """Reads a single `BookResource` that is related to this `TagMap`."""
+  bookResourceByResourceId: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedTagMapId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Tag` that is related to this `TagMap`."""
+  tagByTagId: Tag
+
+  """The `TagMap` that was deleted by this mutation."""
+  tagMap: TagMap
+
+  """An edge for our `TagMap`. May be used by Relay 1."""
+  tagMapEdge(
+    """The method to use when ordering `TagMap`."""
+    orderBy: [TagMapsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagMapsEdge
+}
+
+"""The output of our delete `Tag` mutation."""
+type DeleteTagPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedTagId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Tag` that was deleted by this mutation."""
+  tag: Tag
+
+  """An edge for our `Tag`. May be used by Relay 1."""
+  tagEdge(
+    """The method to use when ordering `Tag`."""
+    orderBy: [TagsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagsEdge
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Article`."""
+  createArticle(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateArticleInput!
+  ): CreateArticlePayload
+
+  """Creates a single `Author`."""
+  createAuthor(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateAuthorInput!
+  ): CreateAuthorPayload
+
+  """Creates a single `BookResource`."""
+  createBookResource(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateBookResourceInput!
+  ): CreateBookResourcePayload
+
+  """Creates a single `Serial`."""
+  createSerial(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateSerialInput!
+  ): CreateSerialPayload
+
+  """Creates a single `SerialNumber`."""
+  createSerialNumber(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateSerialNumberInput!
+  ): CreateSerialNumberPayload
+
+  """Creates a single `Tag`."""
+  createTag(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateTagInput!
+  ): CreateTagPayload
+
+  """Creates a single `TagMap`."""
+  createTagMap(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateTagMapInput!
+  ): CreateTagMapPayload
+
+  """Deletes a single `Article` using its globally unique id."""
+  deleteArticle(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteArticleInput!
+  ): DeleteArticlePayload
+
+  """Deletes a single `Article` using a unique key."""
+  deleteArticleById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteArticleByIdInput!
+  ): DeleteArticlePayload
+
+  """Deletes a single `Author` using its globally unique id."""
+  deleteAuthor(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAuthorInput!
+  ): DeleteAuthorPayload
+
+  """Deletes a single `Author` using a unique key."""
+  deleteAuthorByIdAndOrder(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAuthorByIdAndOrderInput!
+  ): DeleteAuthorPayload
+
+  """Deletes a single `BookResource` using its globally unique id."""
+  deleteBookResource(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteBookResourceInput!
+  ): DeleteBookResourcePayload
+
+  """Deletes a single `BookResource` using a unique key."""
+  deleteBookResourceById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteBookResourceByIdInput!
+  ): DeleteBookResourcePayload
+
+  """Deletes a single `Serial` using its globally unique id."""
+  deleteSerial(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteSerialInput!
+  ): DeleteSerialPayload
+
+  """Deletes a single `Serial` using a unique key."""
+  deleteSerialById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteSerialByIdInput!
+  ): DeleteSerialPayload
+
+  """Deletes a single `SerialNumber` using its globally unique id."""
+  deleteSerialNumber(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteSerialNumberInput!
+  ): DeleteSerialNumberPayload
+
+  """Deletes a single `SerialNumber` using a unique key."""
+  deleteSerialNumberById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteSerialNumberByIdInput!
+  ): DeleteSerialNumberPayload
+
+  """Deletes a single `Tag` using its globally unique id."""
+  deleteTag(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteTagInput!
+  ): DeleteTagPayload
+
+  """Deletes a single `Tag` using a unique key."""
+  deleteTagById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteTagByIdInput!
+  ): DeleteTagPayload
+
+  """Deletes a single `TagMap` using its globally unique id."""
+  deleteTagMap(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteTagMapInput!
+  ): DeleteTagMapPayload
+
+  """Deletes a single `TagMap` using a unique key."""
+  deleteTagMapByResourceIdAndTagId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteTagMapByResourceIdAndTagIdInput!
+  ): DeleteTagMapPayload
+
+  """Updates a single `Article` using its globally unique id and a patch."""
+  updateArticle(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateArticleInput!
+  ): UpdateArticlePayload
+
+  """Updates a single `Article` using a unique key and a patch."""
+  updateArticleById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateArticleByIdInput!
+  ): UpdateArticlePayload
+
+  """Updates a single `Author` using its globally unique id and a patch."""
+  updateAuthor(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAuthorInput!
+  ): UpdateAuthorPayload
+
+  """Updates a single `Author` using a unique key and a patch."""
+  updateAuthorByIdAndOrder(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAuthorByIdAndOrderInput!
+  ): UpdateAuthorPayload
+
+  """
+  Updates a single `BookResource` using its globally unique id and a patch.
+  """
+  updateBookResource(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateBookResourceInput!
+  ): UpdateBookResourcePayload
+
+  """Updates a single `BookResource` using a unique key and a patch."""
+  updateBookResourceById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateBookResourceByIdInput!
+  ): UpdateBookResourcePayload
+
+  """Updates a single `Serial` using its globally unique id and a patch."""
+  updateSerial(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateSerialInput!
+  ): UpdateSerialPayload
+
+  """Updates a single `Serial` using a unique key and a patch."""
+  updateSerialById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateSerialByIdInput!
+  ): UpdateSerialPayload
+
+  """
+  Updates a single `SerialNumber` using its globally unique id and a patch.
+  """
+  updateSerialNumber(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateSerialNumberInput!
+  ): UpdateSerialNumberPayload
+
+  """Updates a single `SerialNumber` using a unique key and a patch."""
+  updateSerialNumberById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateSerialNumberByIdInput!
+  ): UpdateSerialNumberPayload
+
+  """Updates a single `Tag` using its globally unique id and a patch."""
+  updateTag(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTagInput!
+  ): UpdateTagPayload
+
+  """Updates a single `Tag` using a unique key and a patch."""
+  updateTagById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTagByIdInput!
+  ): UpdateTagPayload
+
+  """Updates a single `TagMap` using its globally unique id and a patch."""
+  updateTagMap(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTagMapInput!
+  ): UpdateTagMapPayload
+
+  """Updates a single `TagMap` using a unique key and a patch."""
+  updateTagMapByResourceIdAndTagId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTagMapByResourceIdAndTagIdInput!
+  ): UpdateTagMapPayload
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+}
+
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """Reads and enables pagination through a set of `Article`."""
+  allArticles(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ArticleCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Article`."""
+    orderBy: [ArticlesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ArticlesConnection
+
+  """Reads a set of `Article`."""
+  allArticlesList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ArticleCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Article`."""
+    orderBy: [ArticlesOrderBy!]
+  ): [Article!]
+
+  """Reads and enables pagination through a set of `Author`."""
+  allAuthors(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AuthorCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AuthorsConnection
+
+  """Reads a set of `Author`."""
+  allAuthorsList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AuthorCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!]
+  ): [Author!]
+
+  """Reads and enables pagination through a set of `BookResource`."""
+  allBookResources(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: BookResourceCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `BookResource`."""
+    orderBy: [BookResourcesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BookResourcesConnection
+
+  """Reads a set of `BookResource`."""
+  allBookResourcesList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: BookResourceCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `BookResource`."""
+    orderBy: [BookResourcesOrderBy!]
+  ): [BookResource!]
+
+  """Reads and enables pagination through a set of `SerialNumber`."""
+  allSerialNumbers(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: SerialNumberCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `SerialNumber`."""
+    orderBy: [SerialNumbersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SerialNumbersConnection
+
+  """Reads a set of `SerialNumber`."""
+  allSerialNumbersList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: SerialNumberCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `SerialNumber`."""
+    orderBy: [SerialNumbersOrderBy!]
+  ): [SerialNumber!]
+
+  """Reads and enables pagination through a set of `Serial`."""
+  allSerials(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: SerialCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Serial`."""
+    orderBy: [SerialsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SerialsConnection
+
+  """Reads a set of `Serial`."""
+  allSerialsList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: SerialCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Serial`."""
+    orderBy: [SerialsOrderBy!]
+  ): [Serial!]
+
+  """Reads and enables pagination through a set of `TagMap`."""
+  allTagMaps(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TagMapCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `TagMap`."""
+    orderBy: [TagMapsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagMapsConnection
+
+  """Reads a set of `TagMap`."""
+  allTagMapsList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TagMapCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `TagMap`."""
+    orderBy: [TagMapsOrderBy!]
+  ): [TagMap!]
+
+  """Reads and enables pagination through a set of `Tag`."""
+  allTags(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TagCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Tag`."""
+    orderBy: [TagsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagsConnection
+
+  """Reads a set of `Tag`."""
+  allTagsList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TagCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Tag`."""
+    orderBy: [TagsOrderBy!]
+  ): [Tag!]
+
+  """Reads a single `Article` using its globally unique `ID`."""
+  article(
+    """The globally unique `ID` to be used in selecting a single `Article`."""
+    nodeId: ID!
+  ): Article
+  articleById(id: Int!): Article
+
+  """Reads a single `Author` using its globally unique `ID`."""
+  author(
+    """The globally unique `ID` to be used in selecting a single `Author`."""
+    nodeId: ID!
+  ): Author
+  authorByIdAndOrder(id: Int!, order: Int!): Author
+
+  """Reads a single `BookResource` using its globally unique `ID`."""
+  bookResource(
+    """
+    The globally unique `ID` to be used in selecting a single `BookResource`.
+    """
+    nodeId: ID!
+  ): BookResource
+  bookResourceById(id: Int!): BookResource
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    nodeId: ID!
+  ): Node
+
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  nodeId: ID!
+
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+
+  """Reads a single `Serial` using its globally unique `ID`."""
+  serial(
+    """The globally unique `ID` to be used in selecting a single `Serial`."""
+    nodeId: ID!
+  ): Serial
+  serialById(id: Int!): Serial
+
+  """Reads a single `SerialNumber` using its globally unique `ID`."""
+  serialNumber(
+    """
+    The globally unique `ID` to be used in selecting a single `SerialNumber`.
+    """
+    nodeId: ID!
+  ): SerialNumber
+  serialNumberById(id: Int!): SerialNumber
+
+  """Reads a single `Tag` using its globally unique `ID`."""
+  tag(
+    """The globally unique `ID` to be used in selecting a single `Tag`."""
+    nodeId: ID!
+  ): Tag
+  tagById(id: Int!): Tag
+
+  """Reads a single `TagMap` using its globally unique `ID`."""
+  tagMap(
+    """The globally unique `ID` to be used in selecting a single `TagMap`."""
+    nodeId: ID!
+  ): TagMap
+  tagMapByResourceIdAndTagId(resourceId: Int!, tagId: Int!): TagMap
+}
+
+type Serial implements Node {
+  """Reads a single `BookResource` that is related to this `Serial`."""
+  bookResourceById: BookResource
+  id: Int!
+  ndl: String
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads and enables pagination through a set of `SerialNumber`."""
+  serialNumbersBySerialId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: SerialNumberCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `SerialNumber`."""
+    orderBy: [SerialNumbersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SerialNumbersConnection!
+
+  """Reads and enables pagination through a set of `SerialNumber`."""
+  serialNumbersBySerialIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: SerialNumberCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `SerialNumber`."""
+    orderBy: [SerialNumbersOrderBy!]
+  ): [SerialNumber!]!
+  subjoinder: String!
+  title: String!
+}
+
+"""
+A condition to be used against `Serial` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input SerialCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `ndl` field."""
+  ndl: String
+
+  """Checks for equality with the object’s `subjoinder` field."""
+  subjoinder: String
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+}
+
+"""An input for mutations affecting `Serial`"""
+input SerialInput {
+  id: Int!
+  ndl: String
+  subjoinder: String
+  title: String
+}
+
+type SerialNumber implements Node {
+  """Reads and enables pagination through a set of `Article`."""
+  articlesBySerialNumberId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ArticleCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Article`."""
+    orderBy: [ArticlesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ArticlesConnection!
+
+  """Reads and enables pagination through a set of `Article`."""
+  articlesBySerialNumberIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ArticleCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Article`."""
+    orderBy: [ArticlesOrderBy!]
+  ): [Article!]!
+
+  """Reads a single `BookResource` that is related to this `SerialNumber`."""
+  bookResourceById: BookResource
+  date: String!
+  id: Int!
+  issued: String!
+  ndl: String
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  number: Int
+
+  """Reads a single `Serial` that is related to this `SerialNumber`."""
+  serialBySerialId: Serial
+  serialId: Int!
+  serialNumber: Int
+  specialTopic: String!
+  subjoinder: String!
+  vol: Int
+}
+
+"""
+A condition to be used against `SerialNumber` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input SerialNumberCondition {
+  """Checks for equality with the object’s `date` field."""
+  date: String
+
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `issued` field."""
+  issued: String
+
+  """Checks for equality with the object’s `ndl` field."""
+  ndl: String
+
+  """Checks for equality with the object’s `number` field."""
+  number: Int
+
+  """Checks for equality with the object’s `serialId` field."""
+  serialId: Int
+
+  """Checks for equality with the object’s `serialNumber` field."""
+  serialNumber: Int
+
+  """Checks for equality with the object’s `specialTopic` field."""
+  specialTopic: String
+
+  """Checks for equality with the object’s `subjoinder` field."""
+  subjoinder: String
+
+  """Checks for equality with the object’s `vol` field."""
+  vol: Int
+}
+
+"""An input for mutations affecting `SerialNumber`"""
+input SerialNumberInput {
+  date: String
+  id: Int!
+  issued: String
+  ndl: String
+  number: Int
+  serialId: Int!
+  serialNumber: Int
+  specialTopic: String
+  subjoinder: String
+  vol: Int
+}
+
+"""
+Represents an update to a `SerialNumber`. Fields that are set will be updated.
+"""
+input SerialNumberPatch {
+  date: String
+  id: Int
+  issued: String
+  ndl: String
+  number: Int
+  serialId: Int
+  serialNumber: Int
+  specialTopic: String
+  subjoinder: String
+  vol: Int
+}
+
+"""A connection to a list of `SerialNumber` values."""
+type SerialNumbersConnection {
+  """
+  A list of edges which contains the `SerialNumber` and cursor to aid in pagination.
+  """
+  edges: [SerialNumbersEdge!]!
+
+  """A list of `SerialNumber` objects."""
+  nodes: [SerialNumber]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `SerialNumber` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `SerialNumber` edge in the connection."""
+type SerialNumbersEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `SerialNumber` at the end of the edge."""
+  node: SerialNumber
+}
+
+"""Methods to use when ordering `SerialNumber`."""
+enum SerialNumbersOrderBy {
+  DATE_ASC
+  DATE_DESC
+  ID_ASC
+  ID_DESC
+  ISSUED_ASC
+  ISSUED_DESC
+  NATURAL
+  NDL_ASC
+  NDL_DESC
+  NUMBER_ASC
+  NUMBER_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  SERIAL_ID_ASC
+  SERIAL_ID_DESC
+  SERIAL_NUMBER_ASC
+  SERIAL_NUMBER_DESC
+  SPECIAL_TOPIC_ASC
+  SPECIAL_TOPIC_DESC
+  SUBJOINDER_ASC
+  SUBJOINDER_DESC
+  VOL_ASC
+  VOL_DESC
+}
+
+"""
+Represents an update to a `Serial`. Fields that are set will be updated.
+"""
+input SerialPatch {
+  id: Int
+  ndl: String
+  subjoinder: String
+  title: String
+}
+
+"""A connection to a list of `Serial` values."""
+type SerialsConnection {
+  """
+  A list of edges which contains the `Serial` and cursor to aid in pagination.
+  """
+  edges: [SerialsEdge!]!
+
+  """A list of `Serial` objects."""
+  nodes: [Serial]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Serial` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Serial` edge in the connection."""
+type SerialsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Serial` at the end of the edge."""
+  node: Serial
+}
+
+"""Methods to use when ordering `Serial`."""
+enum SerialsOrderBy {
+  ID_ASC
+  ID_DESC
+  NATURAL
+  NDL_ASC
+  NDL_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  SUBJOINDER_ASC
+  SUBJOINDER_DESC
+  TITLE_ASC
+  TITLE_DESC
+}
+
+type Tag implements Node {
+  id: Int!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads and enables pagination through a set of `TagMap`."""
+  tagMapsByTagId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TagMapCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `TagMap`."""
+    orderBy: [TagMapsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagMapsConnection!
+
+  """Reads and enables pagination through a set of `TagMap`."""
+  tagMapsByTagIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TagMapCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `TagMap`."""
+    orderBy: [TagMapsOrderBy!]
+  ): [TagMap!]!
+  title: String!
+}
+
+"""
+A condition to be used against `Tag` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input TagCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+}
+
+"""An input for mutations affecting `Tag`"""
+input TagInput {
+  id: Int!
+  title: String
+}
+
+type TagMap implements Node {
+  """Reads a single `BookResource` that is related to this `TagMap`."""
+  bookResourceByResourceId: BookResource
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  resourceId: Int!
+
+  """Reads a single `Tag` that is related to this `TagMap`."""
+  tagByTagId: Tag
+  tagId: Int!
+}
+
+"""
+A condition to be used against `TagMap` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input TagMapCondition {
+  """Checks for equality with the object’s `resourceId` field."""
+  resourceId: Int
+
+  """Checks for equality with the object’s `tagId` field."""
+  tagId: Int
+}
+
+"""An input for mutations affecting `TagMap`"""
+input TagMapInput {
+  resourceId: Int!
+  tagId: Int!
+}
+
+"""
+Represents an update to a `TagMap`. Fields that are set will be updated.
+"""
+input TagMapPatch {
+  resourceId: Int
+  tagId: Int
+}
+
+"""A connection to a list of `TagMap` values."""
+type TagMapsConnection {
+  """
+  A list of edges which contains the `TagMap` and cursor to aid in pagination.
+  """
+  edges: [TagMapsEdge!]!
+
+  """A list of `TagMap` objects."""
+  nodes: [TagMap]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `TagMap` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `TagMap` edge in the connection."""
+type TagMapsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `TagMap` at the end of the edge."""
+  node: TagMap
+}
+
+"""Methods to use when ordering `TagMap`."""
+enum TagMapsOrderBy {
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  RESOURCE_ID_ASC
+  RESOURCE_ID_DESC
+  TAG_ID_ASC
+  TAG_ID_DESC
+}
+
+"""Represents an update to a `Tag`. Fields that are set will be updated."""
+input TagPatch {
+  id: Int
+  title: String
+}
+
+"""A connection to a list of `Tag` values."""
+type TagsConnection {
+  """
+  A list of edges which contains the `Tag` and cursor to aid in pagination.
+  """
+  edges: [TagsEdge!]!
+
+  """A list of `Tag` objects."""
+  nodes: [Tag]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Tag` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Tag` edge in the connection."""
+type TagsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Tag` at the end of the edge."""
+  node: Tag
+}
+
+"""Methods to use when ordering `Tag`."""
+enum TagsOrderBy {
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  TITLE_ASC
+  TITLE_DESC
+}
+
+"""All input for the `updateArticleById` mutation."""
+input UpdateArticleByIdInput {
+  """
+  An object where the defined keys will be set on the `Article` being updated.
+  """
+  articlePatch: ArticlePatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `updateArticle` mutation."""
+input UpdateArticleInput {
+  """
+  An object where the defined keys will be set on the `Article` being updated.
+  """
+  articlePatch: ArticlePatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Article` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `Article` mutation."""
+type UpdateArticlePayload {
+  """The `Article` that was updated by this mutation."""
+  article: Article
+
+  """An edge for our `Article`. May be used by Relay 1."""
+  articleEdge(
+    """The method to use when ordering `Article`."""
+    orderBy: [ArticlesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ArticlesEdge
+
+  """Reads a single `BookResource` that is related to this `Article`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `SerialNumber` that is related to this `Article`."""
+  serialNumberBySerialNumberId: SerialNumber
+}
+
+"""All input for the `updateAuthorByIdAndOrder` mutation."""
+input UpdateAuthorByIdAndOrderInput {
+  """
+  An object where the defined keys will be set on the `Author` being updated.
+  """
+  authorPatch: AuthorPatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+  order: Int!
+}
+
+"""All input for the `updateAuthor` mutation."""
+input UpdateAuthorInput {
+  """
+  An object where the defined keys will be set on the `Author` being updated.
+  """
+  authorPatch: AuthorPatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Author` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `Author` mutation."""
+type UpdateAuthorPayload {
+  """The `Author` that was updated by this mutation."""
+  author: Author
+
+  """An edge for our `Author`. May be used by Relay 1."""
+  authorEdge(
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AuthorsEdge
+
+  """Reads a single `BookResource` that is related to this `Author`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateBookResourceById` mutation."""
+input UpdateBookResourceByIdInput {
+  """
+  An object where the defined keys will be set on the `BookResource` being updated.
+  """
+  bookResourcePatch: BookResourcePatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `updateBookResource` mutation."""
+input UpdateBookResourceInput {
+  """
+  An object where the defined keys will be set on the `BookResource` being updated.
+  """
+  bookResourcePatch: BookResourcePatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `BookResource` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `BookResource` mutation."""
+type UpdateBookResourcePayload {
+  """The `BookResource` that was updated by this mutation."""
+  bookResource: BookResource
+
+  """An edge for our `BookResource`. May be used by Relay 1."""
+  bookResourceEdge(
+    """The method to use when ordering `BookResource`."""
+    orderBy: [BookResourcesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BookResourcesEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateSerialById` mutation."""
+input UpdateSerialByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `Serial` being updated.
+  """
+  serialPatch: SerialPatch!
+}
+
+"""All input for the `updateSerial` mutation."""
+input UpdateSerialInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Serial` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Serial` being updated.
+  """
+  serialPatch: SerialPatch!
+}
+
+"""All input for the `updateSerialNumberById` mutation."""
+input UpdateSerialNumberByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `SerialNumber` being updated.
+  """
+  serialNumberPatch: SerialNumberPatch!
+}
+
+"""All input for the `updateSerialNumber` mutation."""
+input UpdateSerialNumberInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `SerialNumber` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `SerialNumber` being updated.
+  """
+  serialNumberPatch: SerialNumberPatch!
+}
+
+"""The output of our update `SerialNumber` mutation."""
+type UpdateSerialNumberPayload {
+  """Reads a single `BookResource` that is related to this `SerialNumber`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Serial` that is related to this `SerialNumber`."""
+  serialBySerialId: Serial
+
+  """The `SerialNumber` that was updated by this mutation."""
+  serialNumber: SerialNumber
+
+  """An edge for our `SerialNumber`. May be used by Relay 1."""
+  serialNumberEdge(
+    """The method to use when ordering `SerialNumber`."""
+    orderBy: [SerialNumbersOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SerialNumbersEdge
+}
+
+"""The output of our update `Serial` mutation."""
+type UpdateSerialPayload {
+  """Reads a single `BookResource` that is related to this `Serial`."""
+  bookResourceById: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Serial` that was updated by this mutation."""
+  serial: Serial
+
+  """An edge for our `Serial`. May be used by Relay 1."""
+  serialEdge(
+    """The method to use when ordering `Serial`."""
+    orderBy: [SerialsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SerialsEdge
+}
+
+"""All input for the `updateTagById` mutation."""
+input UpdateTagByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `Tag` being updated.
+  """
+  tagPatch: TagPatch!
+}
+
+"""All input for the `updateTag` mutation."""
+input UpdateTagInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Tag` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Tag` being updated.
+  """
+  tagPatch: TagPatch!
+}
+
+"""All input for the `updateTagMapByResourceIdAndTagId` mutation."""
+input UpdateTagMapByResourceIdAndTagIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  resourceId: Int!
+  tagId: Int!
+
+  """
+  An object where the defined keys will be set on the `TagMap` being updated.
+  """
+  tagMapPatch: TagMapPatch!
+}
+
+"""All input for the `updateTagMap` mutation."""
+input UpdateTagMapInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `TagMap` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `TagMap` being updated.
+  """
+  tagMapPatch: TagMapPatch!
+}
+
+"""The output of our update `TagMap` mutation."""
+type UpdateTagMapPayload {
+  """Reads a single `BookResource` that is related to this `TagMap`."""
+  bookResourceByResourceId: BookResource
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Tag` that is related to this `TagMap`."""
+  tagByTagId: Tag
+
+  """The `TagMap` that was updated by this mutation."""
+  tagMap: TagMap
+
+  """An edge for our `TagMap`. May be used by Relay 1."""
+  tagMapEdge(
+    """The method to use when ordering `TagMap`."""
+    orderBy: [TagMapsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagMapsEdge
+}
+
+"""The output of our update `Tag` mutation."""
+type UpdateTagPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Tag` that was updated by this mutation."""
+  tag: Tag
+
+  """An edge for our `Tag`. May be used by Relay 1."""
+  tagEdge(
+    """The method to use when ordering `Tag`."""
+    orderBy: [TagsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): TagsEdge
+}

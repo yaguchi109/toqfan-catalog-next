@@ -1,0 +1,11 @@
+schema: ${GRAPH_QL_SCHEMA}
+generates:
+  ./src/graphql/types.d.ts:
+    documents: './src/**/!(*.d).{ts,tsx}'
+    plugins:
+      - typescript
+      - typescript-operations
+  ${GRAPH_QL_INTROSPECTION}:
+    plugins:
+      - introspection
+

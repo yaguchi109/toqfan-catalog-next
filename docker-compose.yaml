@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  postgres:
+    image: postgres:13
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    user: "${UID_GID}"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      TZ: "Asia/Tokyo"
+    volumes:
+    - "./db/${DB_DOCKER_VOLUME}:/var/lib/postgresql/data"
+    - "/etc/passwd:/etc/passwd:ro"
+

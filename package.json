@@ -1,0 +1,53 @@
+{
+  "browserslist": [
+    ">0.3%",
+    "not ie <= 11",
+    "not dead",
+    "not op_mini all"
+  ],
+  "scripts": {
+    "dev": "npm run _backend-up & npm run _type-generate & npm run _dev",
+    "export": "npm run _build && npm run _export && npm run _post-export",
+    "_backend-up": "./db/common_up.sh && node postgraphile.js",
+    "_type-generate": "graphql-codegen --require dotenv/config --watch",
+    "_dev": "next dev",
+    "_build": "next build",
+    "_export": "next export -o next_out",
+    "_post-export": "mv ./next_out/404/index.html ./next_out/404.html && next-sitemap",
+    "start": "next start",
+    "format": "prettier --write --ignore-path .gitignore \"**/*.{js,jsx,ts,tsx,json,css,scss}\"",
+    "lint": "next lint",
+    "ncu": "npm-check-updates"
+  },
+  "dependencies": {
+    "bulma": "^0.9.3",
+    "dotenv": "^10.0.0",
+    "graphql": "^15.6.0",
+    "graphql-request": "^3.5.0",
+    "graphql-tag": "^2.12.5",
+    "next": "^11.1.2",
+    "postgraphile": "^4.12.4",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sass": "^1.42.1"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "@graphql-codegen/cli": "^2.2.0",
+    "@graphql-codegen/introspection": "^2.1.0",
+    "@graphql-codegen/typescript": "^2.2.2",
+    "@graphql-codegen/typescript-operations": "^2.1.5",
+    "@types/gtag.js": "^0.0.7",
+    "@types/react": "^17.0.26",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-graphql": "^4.0.0",
+    "next-sitemap": "^1.6.173",
+    "npm-check-updates": "^11.8.5",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.3"
+  }
+}
