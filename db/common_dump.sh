@@ -5,6 +5,7 @@ DUMPFILE1="dump_pre-data.sql"
 DUMPFILE2="dump_data.sql"
 DUMPFILE3="dump_post-data.sql"
 
+export LANG=C.UTF-8
 export UID_GID="$(id -u):$(id -g)"
 cd "$CURRENT/../" &&
 source .env &&
