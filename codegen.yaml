@@ -5,6 +5,7 @@ generates:
     plugins:
       - typescript
       - typescript-operations
+      - typescript-graphql-request
   ${GRAPH_QL_INTROSPECTION}:
     plugins:
       - introspection

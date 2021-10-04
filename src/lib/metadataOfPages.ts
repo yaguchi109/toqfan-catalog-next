@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-request';
 import siteData, { MetadataOfPage } from 'src/commons/lib/siteData';
 import { getSerialNumberName } from './serialNumberName';
 
@@ -19,7 +19,7 @@ export const getMetadataOfSerialPage = (
   return page;
 };
 
-import { MetadataOfSerialPageFragment } from 'src/graphql/types';
+import { MetadataOfSerialPageFragment } from 'src/graphql/types.d';
 export const metadataOfSerialPageFragment = gql`
   fragment MetadataOfSerialPage on Serial {
     id
@@ -41,7 +41,7 @@ export const getMetadataOfTagPage = (
   return page;
 };
 
-import { MetadataOfTagPageFragment } from 'src/graphql/types';
+import { MetadataOfTagPageFragment } from 'src/graphql/types.d';
 export const metadataOfTagPageFragment = gql`
   fragment MetadataOfTagPage on Tag {
     id
@@ -63,7 +63,7 @@ export const getMetadataOfArticlePage = (
   return page;
 };
 
-import { MetadataOfArticlePageFragment } from 'src/graphql/types';
+import { MetadataOfArticlePageFragment } from 'src/graphql/types.d';
 export const metadataOfArticlePageFragment = gql`
   fragment MetadataOfArticlePage on Article {
     id
@@ -87,7 +87,7 @@ export const getMetadataOfSerialNumberPage = (
   return page;
 };
 
-import { MetadataOfSerialNumberPageFragment } from 'src/graphql/types';
+import { MetadataOfSerialNumberPageFragment } from 'src/graphql/types.d';
 export const metadataOfSerialNumberPageFragment = gql`
   fragment MetadataOfSerialNumberPage on SerialNumber {
     id

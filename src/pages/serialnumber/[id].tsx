@@ -5,27 +5,16 @@ import type {
   NextPage,
 } from 'next';
 import Layout from 'src/commons/components/layout';
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-request';
 import { graphQLClient } from 'src/commons/lib/graphQLClient';
+import { getSdk } from 'src/graphql/types.d';
+import { ArticlesTable } from 'src/components/molecules/article';
 import {
-  SerialNumberPageQuery,
-  SerialNumberPagePathsQuery,
-} from 'src/graphql/types';
-import {
-  articleFragment,
-  ArticlesTable,
-} from 'src/components/molecules/article';
-import {
-  metadataOfSerialPageFragment,
-  metadataOfSerialNumberPageFragment,
   getMetadataOfSerialPage,
   getMetadataOfSerialNumberPage,
 } from 'src/lib/metadataOfPages';
 import siteData from 'src/commons/lib/siteData';
-import {
-  serialNumberFragment,
-  SerialNumberTable,
-} from 'src/components/molecules/serialNumber';
+import { SerialNumberTable } from 'src/components/molecules/serialNumber';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 const Component: NextPage<Props> = ({ data }) => {
@@ -73,13 +62,9 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
         }
       }
     }
-    ${metadataOfSerialPageFragment}
-    ${metadataOfSerialNumberPageFragment}
-    ${serialNumberFragment}
-    ${articleFragment}
   `;
 
-  const data = await graphQLClient.request<SerialNumberPageQuery>(query, {
+  const data = await getSdk(graphQLClient).SerialNumberPage({
     id: Number(context.params?.id),
   });
 
@@ -98,7 +83,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
   `;
 
-  const data = await graphQLClient.request<SerialNumberPagePathsQuery>(query);
+  const data = await getSdk(graphQLClient).SerialNumberPagePaths();
 
   const paths = data.items
     ? data.items

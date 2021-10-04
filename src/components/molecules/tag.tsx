@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-request';
 import {
   CommonTable,
   CommonListTable,
@@ -8,11 +8,8 @@ import {
   ColumnsGeneraterInterface,
   Column,
 } from 'src/components/molecules/commonTable';
-import {
-  getMetadataOfTagPage,
-  metadataOfTagPageFragment,
-} from 'src/lib/metadataOfPages';
-import { TagFragment } from 'src/graphql/types';
+import { getMetadataOfTagPage } from 'src/lib/metadataOfPages';
+import { TagFragment } from 'src/graphql/types.d';
 
 interface TagsTableProps {
   tags?: readonly TagFragment[];
@@ -76,5 +73,4 @@ export const tagFragment = gql`
       totalCount
     }
   }
-  ${metadataOfTagPageFragment}
 `;

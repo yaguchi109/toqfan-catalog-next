@@ -1,7 +1,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-request';
 import {
   CommonTable,
   CommonListTable,
@@ -9,21 +9,15 @@ import {
   KeyGeneraterInterface,
   Column,
 } from 'src/components/molecules/commonTable';
-import Authors, { authorsFragment } from 'src/components/atoms/authors';
+import Authors from 'src/components/atoms/authors';
 import Ndl from 'src/components/atoms/ndl';
-import {
-  getSerialNumberName,
-  serialNumberNameFragment,
-} from 'src/lib/serialNumberName';
+import { getSerialNumberName } from 'src/lib/serialNumberName';
 import {
   getMetadataOfSerialPage,
-  metadataOfSerialPageFragment,
   getMetadataOfSerialNumberPage,
-  metadataOfSerialNumberPageFragment,
   getMetadataOfTagPage,
-  metadataOfTagPageFragment,
 } from 'src/lib/metadataOfPages';
-import { ArticleFragment } from 'src/graphql/types';
+import { ArticleFragment } from 'src/graphql/types.d';
 
 interface ArticlesTableProps {
   articles?: readonly ArticleFragment[];
@@ -163,9 +157,4 @@ export const articleFragment = gql`
     ndl
     subjoinder
   }
-  ${metadataOfSerialPageFragment}
-  ${metadataOfSerialNumberPageFragment}
-  ${metadataOfTagPageFragment}
-  ${serialNumberNameFragment}
-  ${authorsFragment}
 `;

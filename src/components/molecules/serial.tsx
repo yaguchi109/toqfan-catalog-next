@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-request';
 import {
   CommonTable,
   CommonListTable,
@@ -8,13 +8,10 @@ import {
   ColumnsGeneraterInterface,
   Column,
 } from 'src/components/molecules/commonTable';
-import Authors, { authorsFragment } from 'src/components/atoms/authors';
+import Authors from 'src/components/atoms/authors';
 import Ndl from 'src/components/atoms/ndl';
-import {
-  getMetadataOfSerialPage,
-  metadataOfSerialPageFragment,
-} from 'src/lib/metadataOfPages';
-import { SerialFragment } from 'src/graphql/types';
+import { getMetadataOfSerialPage } from 'src/lib/metadataOfPages';
+import { SerialFragment } from 'src/graphql/types.d';
 
 interface SerialsTableProps {
   serials?: readonly SerialFragment[];
@@ -94,6 +91,4 @@ export const serialFragment = gql`
       totalCount
     }
   }
-  ${metadataOfSerialPageFragment}
-  ${authorsFragment}
 `;

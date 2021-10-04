@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-request';
 import {
   CommonTable,
   CommonListTable,
@@ -8,17 +8,12 @@ import {
   ColumnsGeneraterInterface,
   Column,
 } from 'src/components/molecules/commonTable';
-import Authors, { authorsFragment } from 'src/components/atoms/authors';
+import Authors from 'src/components/atoms/authors';
 import Ndl from 'src/components/atoms/ndl';
-import {
-  getSerialNumberName,
-  serialNumberNameFragment,
-} from 'src/lib/serialNumberName';
+import { getSerialNumberName } from 'src/lib/serialNumberName';
 import {
   getMetadataOfSerialPage,
-  metadataOfSerialPageFragment,
   getMetadataOfSerialNumberPage,
-  metadataOfSerialNumberPageFragment,
 } from 'src/lib/metadataOfPages';
 import { SerialNumberFragment } from 'src/graphql/types.js';
 
@@ -140,8 +135,4 @@ export const serialNumberFragment = gql`
       ...MetadataOfSerialPage
     }
   }
-  ${authorsFragment}
-  ${serialNumberNameFragment}
-  ${metadataOfSerialPageFragment}
-  ${metadataOfSerialNumberPageFragment}
 `;

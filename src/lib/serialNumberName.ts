@@ -1,5 +1,5 @@
-import { gql } from 'graphql-tag';
-import { SerialNumberNameFragment } from 'src/graphql/types';
+import { gql } from 'graphql-request';
+import { SerialNumberNameFragment } from 'src/graphql/types.d';
 
 export const getSerialNumberName = (
   serialNumber?: SerialNumberNameFragment

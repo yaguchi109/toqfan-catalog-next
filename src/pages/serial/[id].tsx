@@ -5,14 +5,11 @@ import type {
   NextPage,
 } from 'next';
 import Layout from 'src/commons/components/layout';
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-request';
 import { graphQLClient } from 'src/commons/lib/graphQLClient';
-import { SerialTable, serialFragment } from 'src/components/molecules/serial';
-import {
-  serialNumberFragment,
-  SerialNumbersTable,
-} from 'src/components/molecules/serialNumber';
-import { SerialPageQuery, SerialPagePathsQuery } from 'src/graphql/types';
+import { SerialTable } from 'src/components/molecules/serial';
+import { SerialNumbersTable } from 'src/components/molecules/serialNumber';
+import { getSdk } from 'src/graphql/types.d';
 import siteData from 'src/commons/lib/siteData';
 import { getMetadataOfSerialPage } from 'src/lib/metadataOfPages';
 
@@ -54,11 +51,9 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
         }
       }
     }
-    ${serialFragment}
-    ${serialNumberFragment}
   `;
 
-  const data = await graphQLClient.request<SerialPageQuery>(query, {
+  const data = await getSdk(graphQLClient).SerialPage({
     id: Number(context.params?.id),
   });
 
@@ -77,7 +72,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
   `;
 
-  const data = await graphQLClient.request<SerialPagePathsQuery>(query);
+  const data = await getSdk(graphQLClient).SerialPagePaths();
 
   const paths = data.items
     ? data.items

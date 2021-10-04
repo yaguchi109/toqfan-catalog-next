@@ -1,11 +1,11 @@
 import type { InferGetStaticPropsType, NextPage } from 'next';
 import Layout from 'src/commons/components/layout';
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-request';
 import { graphQLClient } from 'src/commons/lib/graphQLClient';
-import { IndexPageQuery } from 'src/graphql/types';
+import { getSdk } from 'src/graphql/types.d';
 import siteData from 'src/commons/lib/siteData';
-import { SerialsTable, serialFragment } from 'src/components/molecules/serial';
-import { TagsTable, tagFragment } from 'src/components/molecules/tag';
+import { SerialsTable } from 'src/components/molecules/serial';
+import { TagsTable } from 'src/components/molecules/tag';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 const Component: NextPage<Props> = ({ data }) => {
@@ -44,11 +44,9 @@ export const getStaticProps = async () => {
         ...Tag
       }
     }
-    ${serialFragment}
-    ${tagFragment}
   `;
 
-  const data = await graphQLClient.request<IndexPageQuery>(query);
+  const data = await getSdk(graphQLClient).IndexPage();
 
   return { props: { data } };
 };

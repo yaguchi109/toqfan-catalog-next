@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
-import { gql } from 'graphql-tag';
-import { AuthorsFragment } from 'src/graphql/types';
+import { gql } from 'graphql-request';
+import { AuthorsFragment } from 'src/graphql/types.d';
 
 interface Props {
   authors?: readonly AuthorsFragment[];

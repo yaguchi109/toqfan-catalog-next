@@ -1,3 +1,6 @@
+import { GraphQLClient } from 'graphql-request';
+import * as Dom from 'graphql-request/dist/types.dom';
+import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -2302,3 +2305,253 @@ export type TagPagePathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type TagPagePathsQuery = { __typename?: 'Query', items?: Array<{ __typename?: 'Tag', id: number, tagMapsByTagId: { __typename?: 'TagMapsConnection', totalCount: number } }> | null | undefined };
+
+export const SerialNumberNameFragmentDoc = gql`
+    fragment SerialNumberName on SerialNumber {
+  vol
+  number
+  serialNumber
+  date
+}
+    `;
+export const MetadataOfSerialPageFragmentDoc = gql`
+    fragment MetadataOfSerialPage on Serial {
+  id
+  title
+}
+    `;
+export const MetadataOfSerialNumberPageFragmentDoc = gql`
+    fragment MetadataOfSerialNumberPage on SerialNumber {
+  id
+  ...SerialNumberName
+  serial: serialBySerialId {
+    ...MetadataOfSerialPage
+  }
+}
+    ${SerialNumberNameFragmentDoc}
+${MetadataOfSerialPageFragmentDoc}`;
+export const AuthorsFragmentDoc = gql`
+    fragment Authors on Author {
+  order
+  name
+  nameTranscription
+  type
+  title
+  subjoinder
+}
+    `;
+export const MetadataOfTagPageFragmentDoc = gql`
+    fragment MetadataOfTagPage on Tag {
+  id
+  title
+}
+    `;
+export const ArticleFragmentDoc = gql`
+    fragment Article on Article {
+  id
+  serialNumber: serialNumberBySerialNumberId {
+    ...SerialNumberName
+    ...MetadataOfSerialNumberPage
+    serial: serialBySerialId {
+      ...MetadataOfSerialPage
+    }
+  }
+  pages
+  title
+  bookResource: bookResourceById {
+    authors: authorsByIdList(orderBy: ORDER_ASC) {
+      ...Authors
+    }
+    tagMaps: tagMapsByResourceIdList {
+      tag: tagByTagId {
+        ...MetadataOfTagPage
+        id
+        title
+      }
+    }
+  }
+  ndl
+  subjoinder
+}
+    ${SerialNumberNameFragmentDoc}
+${MetadataOfSerialNumberPageFragmentDoc}
+${MetadataOfSerialPageFragmentDoc}
+${AuthorsFragmentDoc}
+${MetadataOfTagPageFragmentDoc}`;
+export const SerialFragmentDoc = gql`
+    fragment Serial on Serial {
+  ...MetadataOfSerialPage
+  title
+  ndl
+  subjoinder
+  bookResource: bookResourceById {
+    authors: authorsByIdList(orderBy: ORDER_ASC) {
+      ...Authors
+    }
+  }
+  serialNumbersBySerialId {
+    totalCount
+  }
+}
+    ${MetadataOfSerialPageFragmentDoc}
+${AuthorsFragmentDoc}`;
+export const SerialNumberFragmentDoc = gql`
+    fragment SerialNumber on SerialNumber {
+  id
+  issued
+  specialTopic
+  ndl
+  subjoinder
+  bookResource: bookResourceById {
+    authors: authorsByIdList(orderBy: ORDER_ASC) {
+      ...Authors
+    }
+  }
+  ...SerialNumberName
+  ...MetadataOfSerialNumberPage
+  articlesBySerialNumberId {
+    totalCount
+  }
+  serial: serialBySerialId {
+    title
+    ...MetadataOfSerialPage
+  }
+}
+    ${AuthorsFragmentDoc}
+${SerialNumberNameFragmentDoc}
+${MetadataOfSerialNumberPageFragmentDoc}
+${MetadataOfSerialPageFragmentDoc}`;
+export const TagFragmentDoc = gql`
+    fragment Tag on Tag {
+  ...MetadataOfTagPage
+  title
+  tagMapsByTagId {
+    totalCount
+  }
+}
+    ${MetadataOfTagPageFragmentDoc}`;
+export const MetadataOfArticlePageFragmentDoc = gql`
+    fragment MetadataOfArticlePage on Article {
+  id
+  title
+}
+    `;
+export const IndexPageDocument = gql`
+    query IndexPage {
+  serials: allSerialsList(orderBy: TITLE_ASC) {
+    ...Serial
+  }
+  tags: allTagsList(orderBy: TITLE_ASC) {
+    ...Tag
+  }
+}
+    ${SerialFragmentDoc}
+${TagFragmentDoc}`;
+export const SerialPageDocument = gql`
+    query SerialPage($id: Int!) {
+  serial: serialById(id: $id) {
+    ...Serial
+    serialNumbers: serialNumbersBySerialIdList(orderBy: ISSUED_ASC) {
+      ...SerialNumber
+    }
+  }
+}
+    ${SerialFragmentDoc}
+${SerialNumberFragmentDoc}`;
+export const SerialPagePathsDocument = gql`
+    query SerialPagePaths {
+  items: allSerialsList {
+    id
+    serialNumbersBySerialId {
+      totalCount
+    }
+  }
+}
+    `;
+export const SerialNumberPageDocument = gql`
+    query SerialNumberPage($id: Int!) {
+  serialNumber: serialNumberById(id: $id) {
+    ...MetadataOfSerialNumberPage
+    serial: serialBySerialId {
+      ...MetadataOfSerialPage
+    }
+    ...SerialNumber
+    articles: articlesBySerialNumberIdList(orderBy: PAGE_ASC) {
+      ...Article
+    }
+  }
+}
+    ${MetadataOfSerialNumberPageFragmentDoc}
+${MetadataOfSerialPageFragmentDoc}
+${SerialNumberFragmentDoc}
+${ArticleFragmentDoc}`;
+export const SerialNumberPagePathsDocument = gql`
+    query SerialNumberPagePaths {
+  items: allSerialNumbersList {
+    id
+    articlesBySerialNumberId {
+      totalCount
+    }
+  }
+}
+    `;
+export const TagPageDocument = gql`
+    query TagPage($id: Int!) {
+  tag: tagById(id: $id) {
+    ...MetadataOfTagPage
+    tagMaps: tagMapsByTagIdList {
+      bookResource: bookResourceByResourceId {
+        article: articleById {
+          ...Article
+          serialNumber: serialNumberBySerialNumberId {
+            issued
+          }
+        }
+      }
+    }
+  }
+}
+    ${MetadataOfTagPageFragmentDoc}
+${ArticleFragmentDoc}`;
+export const TagPagePathsDocument = gql`
+    query TagPagePaths {
+  items: allTagsList {
+    id
+    tagMapsByTagId {
+      totalCount
+    }
+  }
+}
+    `;
+
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+
+
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+
+export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
+  return {
+    IndexPage(variables?: IndexPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IndexPageQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<IndexPageQuery>(IndexPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'IndexPage');
+    },
+    SerialPage(variables: SerialPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SerialPageQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SerialPageQuery>(SerialPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SerialPage');
+    },
+    SerialPagePaths(variables?: SerialPagePathsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SerialPagePathsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SerialPagePathsQuery>(SerialPagePathsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SerialPagePaths');
+    },
+    SerialNumberPage(variables: SerialNumberPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SerialNumberPageQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SerialNumberPageQuery>(SerialNumberPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SerialNumberPage');
+    },
+    SerialNumberPagePaths(variables?: SerialNumberPagePathsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SerialNumberPagePathsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SerialNumberPagePathsQuery>(SerialNumberPagePathsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SerialNumberPagePaths');
+    },
+    TagPage(variables: TagPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TagPageQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TagPageQuery>(TagPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TagPage');
+    },
+    TagPagePaths(variables?: TagPagePathsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TagPagePathsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TagPagePathsQuery>(TagPagePathsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TagPagePaths');
+    }
+  };
+}
+export type Sdk = ReturnType<typeof getSdk>;

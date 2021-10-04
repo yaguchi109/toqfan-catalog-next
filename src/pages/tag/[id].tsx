@@ -5,21 +5,11 @@ import type {
   NextPage,
 } from 'next';
 import Layout from 'src/commons/components/layout';
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-request';
 import { graphQLClient } from 'src/commons/lib/graphQLClient';
-import {
-  TagPageQuery,
-  TagPagePathsQuery,
-  ArticleFragment,
-} from 'src/graphql/types';
-import {
-  articleFragment,
-  ArticlesTable,
-} from 'src/components/molecules/article';
-import {
-  metadataOfTagPageFragment,
-  getMetadataOfTagPage,
-} from 'src/lib/metadataOfPages';
+import { ArticleFragment, getSdk } from 'src/graphql/types.d';
+import { ArticlesTable } from 'src/components/molecules/article';
+import { getMetadataOfTagPage } from 'src/lib/metadataOfPages';
 import siteData from 'src/commons/lib/siteData';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
@@ -71,11 +61,9 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
         }
       }
     }
-    ${metadataOfTagPageFragment}
-    ${articleFragment}
   `;
 
-  const data = await graphQLClient.request<TagPageQuery>(query, {
+  const data = await getSdk(graphQLClient).TagPage({
     id: Number(context.params?.id),
   });
 
@@ -94,7 +82,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
   `;
 
-  const data = await graphQLClient.request<TagPagePathsQuery>(query);
+  const data = await getSdk(graphQLClient).TagPagePaths();
 
   const paths = data.items
     ? data.items
