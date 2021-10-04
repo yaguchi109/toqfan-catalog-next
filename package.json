@@ -1,9 +1,6 @@
 {
   "browserslist": [
-    ">0.3%",
-    "not ie <= 11",
-    "not dead",
-    "not op_mini all"
+    "supports es6-module and supports es6-module-dynamic-import and >0.3%"
   ],
   "scripts": {
     "dev": "npm run _backend-up & npm run _type-generate & npm run _dev",
