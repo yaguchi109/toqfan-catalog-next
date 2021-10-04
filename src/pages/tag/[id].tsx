@@ -5,7 +5,6 @@ import type {
   NextPage,
 } from 'next';
 import Layout from 'src/commons/components/layout';
-import { gql } from 'graphql-request';
 import { graphQLClient } from 'src/commons/lib/graphQLClient';
 import { ArticleFragment, getSdk } from 'src/graphql/types.d';
 import { ArticlesTable } from 'src/components/molecules/article';
@@ -45,24 +44,6 @@ const Component: NextPage<Props> = ({ data }) => {
 export default Component;
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const query = gql`
-    query TagPage($id: Int!) {
-      tag: tagById(id: $id) {
-        ...MetadataOfTagPage
-        tagMaps: tagMapsByTagIdList {
-          bookResource: bookResourceByResourceId {
-            article: articleById {
-              ...Article
-              serialNumber: serialNumberBySerialNumberId {
-                issued
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
   const data = await getSdk(graphQLClient).TagPage({
     id: Number(context.params?.id),
   });
@@ -71,17 +52,6 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const query = gql`
-    query TagPagePaths {
-      items: allTagsList {
-        id
-        tagMapsByTagId {
-          totalCount
-        }
-      }
-    }
-  `;
-
   const data = await getSdk(graphQLClient).TagPagePaths();
 
   const paths = data.items

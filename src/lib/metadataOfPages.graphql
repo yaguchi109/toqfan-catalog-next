@@ -1,0 +1,22 @@
+fragment MetadataOfSerialPage on Serial {
+  id
+  title
+}
+
+fragment MetadataOfTagPage on Tag {
+  id
+  title
+}
+
+fragment MetadataOfArticlePage on Article {
+  id
+  title
+}
+
+fragment MetadataOfSerialNumberPage on SerialNumber {
+  id
+  ...SerialNumberName
+  serial: serialBySerialId {
+    ...MetadataOfSerialPage
+  }
+}

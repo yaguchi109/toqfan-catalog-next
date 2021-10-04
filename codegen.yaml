@@ -1,7 +1,7 @@
 schema: ${GRAPH_QL_SCHEMA}
 generates:
   ./src/graphql/types.d.ts:
-    documents: './src/**/!(*.d).{ts,tsx}'
+    documents: './src/**/!(*.d).graphql'
     plugins:
       - typescript
       - typescript-operations

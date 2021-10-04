@@ -1,0 +1,7 @@
+fragment Tag on Tag {
+  ...MetadataOfTagPage
+  title
+  tagMapsByTagId {
+    totalCount
+  }
+}

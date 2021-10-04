@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { gql } from 'graphql-request';
 import {
   CommonTable,
   CommonListTable,
@@ -112,27 +111,3 @@ const columnsGenerater: ColumnsGeneraterInterface = (
   ];
   return columns;
 };
-
-export const serialNumberFragment = gql`
-  fragment SerialNumber on SerialNumber {
-    id
-    issued
-    specialTopic
-    ndl
-    subjoinder
-    bookResource: bookResourceById {
-      authors: authorsByIdList(orderBy: ORDER_ASC) {
-        ...Authors
-      }
-    }
-    ...SerialNumberName
-    ...MetadataOfSerialNumberPage
-    articlesBySerialNumberId {
-      totalCount
-    }
-    serial: serialBySerialId {
-      title
-      ...MetadataOfSerialPage
-    }
-  }
-`;

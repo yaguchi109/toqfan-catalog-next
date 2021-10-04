@@ -1,0 +1,21 @@
+query SerialNumberPage($id: Int!) {
+  serialNumber: serialNumberById(id: $id) {
+    ...MetadataOfSerialNumberPage
+    serial: serialBySerialId {
+      ...MetadataOfSerialPage
+    }
+    ...SerialNumber
+    articles: articlesBySerialNumberIdList(orderBy: PAGE_ASC) {
+      ...Article
+    }
+  }
+}
+
+query SerialNumberPagePaths {
+  items: allSerialNumbersList {
+    id
+    articlesBySerialNumberId {
+      totalCount
+    }
+  }
+}

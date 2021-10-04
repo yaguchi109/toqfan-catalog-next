@@ -1,0 +1,8 @@
+query IndexPage {
+  serials: allSerialsList(orderBy: TITLE_ASC) {
+    ...Serial
+  }
+  tags: allTagsList(orderBy: TITLE_ASC) {
+    ...Tag
+  }
+}

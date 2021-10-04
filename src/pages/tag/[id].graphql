@@ -1,0 +1,24 @@
+query TagPage($id: Int!) {
+  tag: tagById(id: $id) {
+    ...MetadataOfTagPage
+    tagMaps: tagMapsByTagIdList {
+      bookResource: bookResourceByResourceId {
+        article: articleById {
+          ...Article
+          serialNumber: serialNumberBySerialNumberId {
+            issued
+          }
+        }
+      }
+    }
+  }
+}
+
+query TagPagePaths {
+  items: allTagsList {
+    id
+    tagMapsByTagId {
+      totalCount
+    }
+  }
+}

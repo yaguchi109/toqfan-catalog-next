@@ -1,0 +1,6 @@
+fragment SerialNumberName on SerialNumber {
+  vol
+  number
+  serialNumber
+  date
+}

@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { gql } from 'graphql-request';
 import { AuthorsFragment } from 'src/graphql/types.d';
 
 interface Props {
@@ -22,14 +21,3 @@ const Component: NextPage<Props> = ({ authors = [] }) => (
   </>
 );
 export default Component;
-
-export const authorsFragment = gql`
-  fragment Authors on Author {
-    order
-    name
-    nameTranscription
-    type
-    title
-    subjoinder
-  }
-`;

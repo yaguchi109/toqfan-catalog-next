@@ -1,6 +1,5 @@
 import type { InferGetStaticPropsType, NextPage } from 'next';
 import Layout from 'src/commons/components/layout';
-import { gql } from 'graphql-request';
 import { graphQLClient } from 'src/commons/lib/graphQLClient';
 import { getSdk } from 'src/graphql/types.d';
 import siteData from 'src/commons/lib/siteData';
@@ -35,17 +34,6 @@ const Component: NextPage<Props> = ({ data }) => {
 export default Component;
 
 export const getStaticProps = async () => {
-  const query = gql`
-    query IndexPage {
-      serials: allSerialsList(orderBy: TITLE_ASC) {
-        ...Serial
-      }
-      tags: allTagsList(orderBy: TITLE_ASC) {
-        ...Tag
-      }
-    }
-  `;
-
   const data = await getSdk(graphQLClient).IndexPage();
 
   return { props: { data } };

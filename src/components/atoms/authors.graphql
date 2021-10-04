@@ -1,0 +1,8 @@
+fragment Authors on Author {
+  order
+  name
+  nameTranscription
+  type
+  title
+  subjoinder
+}

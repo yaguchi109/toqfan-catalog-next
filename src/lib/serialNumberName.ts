@@ -1,4 +1,3 @@
-import { gql } from 'graphql-request';
 import { SerialNumberNameFragment } from 'src/graphql/types.d';
 
 export const getSerialNumberName = (
@@ -13,12 +12,3 @@ export const getSerialNumberName = (
 
   return array.join(' ');
 };
-
-export const serialNumberNameFragment = gql`
-  fragment SerialNumberName on SerialNumber {
-    vol
-    number
-    serialNumber
-    date
-  }
-`;

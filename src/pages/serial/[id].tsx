@@ -5,7 +5,6 @@ import type {
   NextPage,
 } from 'next';
 import Layout from 'src/commons/components/layout';
-import { gql } from 'graphql-request';
 import { graphQLClient } from 'src/commons/lib/graphQLClient';
 import { SerialTable } from 'src/components/molecules/serial';
 import { SerialNumbersTable } from 'src/components/molecules/serialNumber';
@@ -42,17 +41,6 @@ const Component: NextPage<Props> = ({ data }) => {
 export default Component;
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const query = gql`
-    query SerialPage($id: Int!) {
-      serial: serialById(id: $id) {
-        ...Serial
-        serialNumbers: serialNumbersBySerialIdList(orderBy: ISSUED_ASC) {
-          ...SerialNumber
-        }
-      }
-    }
-  `;
-
   const data = await getSdk(graphQLClient).SerialPage({
     id: Number(context.params?.id),
   });
@@ -61,17 +49,6 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const query = gql`
-    query SerialPagePaths {
-      items: allSerialsList {
-        id
-        serialNumbersBySerialId {
-          totalCount
-        }
-      }
-    }
-  `;
-
   const data = await getSdk(graphQLClient).SerialPagePaths();
 
   const paths = data.items

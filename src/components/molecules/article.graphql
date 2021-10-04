@@ -1,0 +1,26 @@
+fragment Article on Article {
+  id
+  serialNumber: serialNumberBySerialNumberId {
+    ...SerialNumberName
+    ...MetadataOfSerialNumberPage
+    serial: serialBySerialId {
+      ...MetadataOfSerialPage
+    }
+  }
+  pages
+  title
+  bookResource: bookResourceById {
+    authors: authorsByIdList(orderBy: ORDER_ASC) {
+      ...Authors
+    }
+    tagMaps: tagMapsByResourceIdList {
+      tag: tagByTagId {
+        ...MetadataOfTagPage
+        id
+        title
+      }
+    }
+  }
+  ndl
+  subjoinder
+}

@@ -1,0 +1,17 @@
+query SerialPage($id: Int!) {
+  serial: serialById(id: $id) {
+    ...Serial
+    serialNumbers: serialNumbersBySerialIdList(orderBy: ISSUED_ASC) {
+      ...SerialNumber
+    }
+  }
+}
+
+query SerialPagePaths {
+  items: allSerialsList {
+    id
+    serialNumbersBySerialId {
+      totalCount
+    }
+  }
+}

@@ -1,0 +1,14 @@
+fragment Serial on Serial {
+  ...MetadataOfSerialPage
+  title
+  ndl
+  subjoinder
+  bookResource: bookResourceById {
+    authors: authorsByIdList(orderBy: ORDER_ASC) {
+      ...Authors
+    }
+  }
+  serialNumbersBySerialId {
+    totalCount
+  }
+}

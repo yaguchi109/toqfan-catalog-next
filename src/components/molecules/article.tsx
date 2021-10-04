@@ -1,7 +1,6 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { gql } from 'graphql-request';
 import {
   CommonTable,
   CommonListTable,
@@ -129,32 +128,3 @@ export const Tags: NextPage<TagsProps> = ({ tagMaps }) => (
     ))}
   </>
 );
-
-export const articleFragment = gql`
-  fragment Article on Article {
-    id
-    serialNumber: serialNumberBySerialNumberId {
-      ...SerialNumberName
-      ...MetadataOfSerialNumberPage
-      serial: serialBySerialId {
-        ...MetadataOfSerialPage
-      }
-    }
-    pages
-    title
-    bookResource: bookResourceById {
-      authors: authorsByIdList(orderBy: ORDER_ASC) {
-        ...Authors
-      }
-      tagMaps: tagMapsByResourceIdList {
-        tag: tagByTagId {
-          ...MetadataOfTagPage
-          id
-          title
-        }
-      }
-    }
-    ndl
-    subjoinder
-  }
-`;

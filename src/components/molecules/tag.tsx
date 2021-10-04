@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { gql } from 'graphql-request';
 import {
   CommonTable,
   CommonListTable,
@@ -64,13 +63,3 @@ const columnsGenerater: ColumnsGeneraterInterface = (item: TagFragment) => {
   ];
   return columns;
 };
-
-export const tagFragment = gql`
-  fragment Tag on Tag {
-    ...MetadataOfTagPage
-    title
-    tagMapsByTagId {
-      totalCount
-    }
-  }
-`;
