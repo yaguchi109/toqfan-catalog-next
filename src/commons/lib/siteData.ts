@@ -29,19 +29,9 @@ const author = {
   mailAddress: process.env.NEXT_PUBLIC_AUTHOR_MAILADDRESS || '',
 };
 
-const timeZoneHour =
-  1000 * 60 * 60 * Number(process.env.NEXT_PUBLIC_TIMEZONE_HOUR);
-const timeZoneMinute =
-  1000 * 60 * Number(process.env.NEXT_PUBLIC_TIMEZONE_MINUTE);
-const getDate = () => {
-  const now = new Date();
-  now.setTime(now.getTime() + timeZoneHour + timeZoneMinute);
-  return now.toISOString().substr(0, 10);
-};
-
 const lastModified = {
   label: process.env.NEXT_PUBLIC_LAST_MODIFIED_LABEL || '',
-  date: getDate(),
+  date: process.env.NEXT_PUBLIC_EXPORT_DATE || '',
 };
 
 const metadataOfEmptyPage: MetadataOfCanRedirectPage = {
