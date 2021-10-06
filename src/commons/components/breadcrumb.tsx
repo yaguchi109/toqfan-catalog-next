@@ -1,5 +1,3 @@
-import type { NextPage } from 'next';
-import React from 'react';
 import { useRouter } from 'next/router';
 import siteData, { MetadataOfPage } from 'src/commons/lib/siteData';
 import PageLink from 'src/commons/components/pageLink';
@@ -8,7 +6,7 @@ interface BreadcrumbElementsListProps {
   breadcrumbsList: MetadataOfPage[][];
   currentPageTitle: string;
 }
-export const BreadcrumbElementsList: NextPage<BreadcrumbElementsListProps> = ({
+export const BreadcrumbElementsList: React.FC<BreadcrumbElementsListProps> = ({
   breadcrumbsList,
   currentPageTitle,
 }) => (
@@ -32,7 +30,7 @@ interface BreadcrumbElementsProps {
   breadcrumbs: MetadataOfPage[];
   currentPageTitle: string;
 }
-const BreadcrumbElements: NextPage<BreadcrumbElementsProps> = ({
+const BreadcrumbElements: React.FC<BreadcrumbElementsProps> = ({
   breadcrumbs,
   currentPageTitle,
 }) => (
@@ -53,7 +51,7 @@ const BreadcrumbElements: NextPage<BreadcrumbElementsProps> = ({
 interface BackLinksProps {
   breadcrumbsList: MetadataOfPage[][];
 }
-export const BackLinks: NextPage<BackLinksProps> = ({ breadcrumbsList }) => {
+export const BackLinks: React.FC<BackLinksProps> = ({ breadcrumbsList }) => {
   const backLinks = breadcrumbsList
     .filter((item) => 0 < item.length)
     .map((item) => item.slice(-1)[0]);

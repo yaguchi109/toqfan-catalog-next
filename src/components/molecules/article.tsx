@@ -1,5 +1,4 @@
 import React from 'react';
-import type { NextPage } from 'next';
 import Link from 'next/link';
 import {
   CommonTable,
@@ -22,7 +21,7 @@ interface ArticlesTableProps {
   articles?: readonly ArticleFragment[];
   hideColumns?: readonly string[];
 }
-export const ArticlesTable: NextPage<ArticlesTableProps> = ({
+export const ArticlesTable: React.FC<ArticlesTableProps> = ({
   articles,
   hideColumns,
 }) => {
@@ -39,7 +38,7 @@ export const ArticlesTable: NextPage<ArticlesTableProps> = ({
 interface ArticleTableProps {
   article?: ArticleFragment;
 }
-export const ArticleTable: NextPage<ArticleTableProps> = ({ article }) => (
+export const ArticleTable: React.FC<ArticleTableProps> = ({ article }) => (
   <CommonTable item={article} columnsGenerater={columnsGenerater} />
 );
 
@@ -116,7 +115,7 @@ const columnsGenerater: ColumnsGeneraterInterface = (item: ArticleFragment) => {
 interface TagsProps {
   tagMaps: any;
 }
-export const Tags: NextPage<TagsProps> = ({ tagMaps }) => (
+export const Tags: React.FC<TagsProps> = ({ tagMaps }) => (
   <>
     {tagMaps.map((tagMap: any, index: any) => (
       <React.Fragment key={tagMap.tag.id}>

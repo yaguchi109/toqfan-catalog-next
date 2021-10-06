@@ -1,10 +1,9 @@
-import type { NextPage } from 'next';
 import { AuthorsFragment } from 'src/graphql/types.d';
 
 interface Props {
   authors?: readonly AuthorsFragment[];
 }
-const Component: NextPage<Props> = ({ authors = [] }) => (
+const Component: React.FC<Props> = ({ authors = [] }) => (
   <>
     {authors &&
       authors.map((author, index) => (

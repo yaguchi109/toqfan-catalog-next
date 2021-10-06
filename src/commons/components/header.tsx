@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import type { NextPage } from 'next';
 import Link from 'next/link';
 import useIsActive from 'src/commons/lib/useIsActive';
 import siteData, { MetadataOfPage } from 'src/commons/lib/siteData';
@@ -10,7 +9,7 @@ interface Props {
   showNavbarBrand: boolean;
   isTopPage: boolean;
 }
-const Component: NextPage<Props> = ({ title, showNavbarBrand, isTopPage }) => {
+const Component: React.FC<Props> = ({ title, showNavbarBrand, isTopPage }) => {
   return (
     <header className='hero is-primary'>
       <HeroHead showNavbarBrand={showNavbarBrand} isTopPage={isTopPage} />
@@ -24,7 +23,7 @@ interface HeroHeadProps {
   showNavbarBrand: boolean;
   isTopPage: boolean;
 }
-const HeroHead: NextPage<HeroHeadProps> = ({ showNavbarBrand, isTopPage }) => {
+const HeroHead: React.FC<HeroHeadProps> = ({ showNavbarBrand, isTopPage }) => {
   const [isBurgerActive, burgerToggle] = useState(false);
   const parentPagesMeta = siteData.parentPages;
   const metadataOfTopPage = siteData.topPage;
@@ -68,7 +67,7 @@ interface NavbarBrandProps {
   isBurgerActive: boolean;
   burgerToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const NavbarBrand: NextPage<NavbarBrandProps> = ({
+const NavbarBrand: React.FC<NavbarBrandProps> = ({
   showNavbarBrand,
   brandPage,
   isBurgerActive,
@@ -103,7 +102,7 @@ const NavbarBrand: NextPage<NavbarBrandProps> = ({
 interface NavbarItemProps {
   globalNavigation: { linkType: string; path: string; title: string };
 }
-const NavbarItem: NextPage<NavbarItemProps> = ({ globalNavigation }) => {
+const NavbarItem: React.FC<NavbarItemProps> = ({ globalNavigation }) => {
   const isActive = useIsActive(globalNavigation.path);
   const activeClassName = isActive ? 'is-active' : '';
   return (
@@ -127,7 +126,7 @@ const NavbarItem: NextPage<NavbarItemProps> = ({ globalNavigation }) => {
 interface HeroBodyProps {
   title: string;
 }
-const HeroBody: NextPage<HeroBodyProps> = ({ title }) => (
+const HeroBody: React.FC<HeroBodyProps> = ({ title }) => (
   <div className='hero-body'>
     <style jsx>{`
       :global(#__next) h1 {

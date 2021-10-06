@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import Link from 'next/link';
 import { MetadataOfPage } from 'src/commons/lib/siteData';
 import useIsActive from 'src/commons/lib/useIsActive';
@@ -17,7 +16,7 @@ export interface DataOfMenuList {
 interface MenuProps {
   data: readonly DataOfMenuLabelAndList[];
 }
-const Component: NextPage<MenuProps> = ({ data }) => {
+const Component: React.FC<MenuProps> = ({ data }) => {
   return (
     <>
       {data.map((item) => (
@@ -31,7 +30,7 @@ export default Component;
 interface MenuLabelAndListProps {
   data: DataOfMenuLabelAndList;
 }
-const MenuLabelAndList: NextPage<MenuLabelAndListProps> = ({ data }) => {
+const MenuLabelAndList: React.FC<MenuLabelAndListProps> = ({ data }) => {
   return (
     <>
       {data.label && <p className='menu-label'>{data.label}</p>}
@@ -43,7 +42,7 @@ const MenuLabelAndList: NextPage<MenuLabelAndListProps> = ({ data }) => {
 interface MenuListProps {
   data: DataOfMenuList;
 }
-const MenuList: NextPage<MenuListProps> = ({ data }) => {
+const MenuList: React.FC<MenuListProps> = ({ data }) => {
   return (
     <ul className='menu-list'>
       {data.pages.map((page) => (
@@ -63,7 +62,7 @@ interface MenuItemProps {
   activePage?: MetadataOfPage;
   subMenuList?: DataOfMenuList;
 }
-const MenuItem: NextPage<MenuItemProps> = ({
+const MenuItem: React.FC<MenuItemProps> = ({
   page,
   activePage,
   subMenuList,
@@ -80,7 +79,7 @@ const MenuItem: NextPage<MenuItemProps> = ({
 interface MenuLinkProps {
   page: MetadataOfPage;
 }
-const MenuLink: NextPage<MenuLinkProps> = ({ page }) => {
+const MenuLink: React.FC<MenuLinkProps> = ({ page }) => {
   const href = page.path;
   const isActive = useIsActive(href);
   const className = isActive ? 'is-active' : '';

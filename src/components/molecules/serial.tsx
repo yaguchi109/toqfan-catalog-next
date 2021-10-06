@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import Link from 'next/link';
 import {
   CommonTable,
@@ -15,7 +14,7 @@ import { SerialFragment } from 'src/graphql/types.d';
 interface SerialsTableProps {
   serials?: readonly SerialFragment[];
 }
-export const SerialsTable: NextPage<SerialsTableProps> = ({ serials = [] }) => (
+export const SerialsTable: React.FC<SerialsTableProps> = ({ serials = [] }) => (
   <CommonListTable
     items={serials}
     keyGenerater={keyGenerater}
@@ -26,7 +25,7 @@ export const SerialsTable: NextPage<SerialsTableProps> = ({ serials = [] }) => (
 interface SerialTableProps {
   serial?: SerialFragment;
 }
-export const SerialTable: NextPage<SerialTableProps> = ({ serial }) => (
+export const SerialTable: React.FC<SerialTableProps> = ({ serial }) => (
   <CommonTable item={serial} columnsGenerater={columnsGenerater} />
 );
 

@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import Link from 'next/link';
 import {
   CommonTable,
@@ -13,7 +12,7 @@ import { TagFragment } from 'src/graphql/types.d';
 interface TagsTableProps {
   tags?: readonly TagFragment[];
 }
-export const TagsTable: NextPage<TagsTableProps> = ({ tags = [] }) => {
+export const TagsTable: React.FC<TagsTableProps> = ({ tags = [] }) => {
   return (
     <CommonListTable
       items={tags}
@@ -26,7 +25,7 @@ export const TagsTable: NextPage<TagsTableProps> = ({ tags = [] }) => {
 interface TagTableProps {
   tag?: TagFragment;
 }
-export const TagTable: NextPage<TagTableProps> = ({ tag }) => (
+export const TagTable: React.FC<TagTableProps> = ({ tag }) => (
   <CommonTable item={tag} columnsGenerater={columnsGenerater} />
 );
 

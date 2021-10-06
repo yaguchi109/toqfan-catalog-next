@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import Link from 'next/link';
 import {
   CommonTable,
@@ -20,7 +19,7 @@ interface SerialNumbersTableProps {
   serialNumbers?: readonly SerialNumberFragment[];
   hideColumns?: readonly string[];
 }
-export const SerialNumbersTable: NextPage<SerialNumbersTableProps> = ({
+export const SerialNumbersTable: React.FC<SerialNumbersTableProps> = ({
   serialNumbers,
   ...listTableProps
 }) => {
@@ -39,7 +38,7 @@ export const SerialNumbersTable: NextPage<SerialNumbersTableProps> = ({
 interface SerialNumberTableProps {
   serialNumber?: SerialNumberFragment;
 }
-export const SerialNumberTable: NextPage<SerialNumberTableProps> = ({
+export const SerialNumberTable: React.FC<SerialNumberTableProps> = ({
   serialNumber,
 }) => <CommonTable item={serialNumber} columnsGenerater={columnsGenerater} />;
 

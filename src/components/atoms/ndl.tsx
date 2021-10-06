@@ -1,9 +1,7 @@
-import type { NextPage } from 'next';
-
 interface Props {
   ndl?: string;
 }
-const Component: NextPage<Props> = ({ ndl }) => (
+const Component: React.FC<Props> = ({ ndl }) => (
   <>
     {ndl && (
       <a href={`https://id.ndl.go.jp/bib/${encodeURIComponent(ndl)}`}>{ndl}</a>

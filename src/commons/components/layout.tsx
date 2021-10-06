@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import Header from 'src/commons/components/header';
 import Footer from 'src/commons/components/footer';
@@ -18,7 +17,7 @@ interface Props {
   isTopPage?: boolean;
   menuData?: DataOfMenuLabelAndList[];
 }
-const Component: NextPage<Props> = ({
+const Component: React.FC<Props> = ({
   children,
   title,
   breadcrumbsList = [],
@@ -91,7 +90,7 @@ interface MainSectionProps {
   showTopBreadcrumbs: boolean;
   showBottomBreadcrumbs: boolean;
 }
-const MainSection: NextPage<MainSectionProps> = ({
+const MainSection: React.FC<MainSectionProps> = ({
   showTopBreadcrumbs,
   showBottomBreadcrumbs,
   currentPageTitle,
@@ -121,7 +120,7 @@ interface BreadcrumbSectionProps {
   currentPageTitle: string;
   breadcrumbsList: MetadataOfPage[][];
 }
-const BreadcrumbSection: NextPage<BreadcrumbSectionProps> = ({
+const BreadcrumbSection: React.FC<BreadcrumbSectionProps> = ({
   currentPageTitle,
   breadcrumbsList,
 }) => {

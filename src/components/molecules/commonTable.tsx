@@ -1,5 +1,3 @@
-import type { NextPage } from 'next';
-
 export interface Column {
   id: string;
   label: string;
@@ -19,7 +17,7 @@ interface CommonTableProps {
   item?: any;
   columnsGenerater: ColumnsGeneraterInterface;
 }
-export const CommonTable: NextPage<CommonTableProps> = ({
+export const CommonTable: React.FC<CommonTableProps> = ({
   item,
   columnsGenerater,
 }) => {
@@ -49,7 +47,7 @@ interface CommonListTableProps {
   columnsGenerater: ColumnsGeneraterInterface;
   hideColumns?: readonly string[];
 }
-export const CommonListTable: NextPage<CommonListTableProps> = ({
+export const CommonListTable: React.FC<CommonListTableProps> = ({
   items = [],
   keyGenerater,
   columnsGenerater,

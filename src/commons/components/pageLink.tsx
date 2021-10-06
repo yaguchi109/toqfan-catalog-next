@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import Link from 'next/link';
 import { MetadataOfPage } from 'src/commons/lib/siteData';
 
@@ -7,7 +6,7 @@ interface Props {
   className?: string;
   title?: string;
 }
-const Component: NextPage<Props> = (props) => {
+const Component: React.FC<Props> = (props) => {
   const { children, page, ...linkProps } = props;
   if (page.linkType !== 'link') {
     return (
