@@ -6,6 +6,11 @@ export const parentPages: MetadataOfPage[] = [
     linkType: 'a',
     path: '/',
   },
+  {
+    title: '書誌',
+    linkType: 'a',
+    path: '/2010/03/04/000039/',
+  },
 ];
 export const infoPage: MetadataOfPage = {
   title: 'このサイトについて',
@@ -20,11 +25,10 @@ export const globalNavigations: MetadataOfPage[] = [
   },
   {
     linkType: 'a',
-    path: '/blog/2007/08/01/photo-topic',
+    path: '/2007/08/01/photo-topic/',
     title: 'フォトニュース・ギャラリー',
   },
-  { linkType: 'a', path: '/blog/2008/07/31/data', title: '資料' },
-  { linkType: 'a', path: '/2008/07/31/data/', title: '資料2' },
+  { linkType: 'a', path: '/2008/07/31/data/', title: '資料' },
   { linkType: 'a', path: '/2021/09/22/shareki/', title: '車歴データベース' },
-  { linkType: 'a', path: '/blog/2010/03/04/000039', title: '書誌' },
+  { linkType: 'a', path: '/2010/03/04/000039/', title: '書誌' },
 ];
