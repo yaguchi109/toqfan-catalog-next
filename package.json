@@ -16,36 +16,36 @@
   "dependencies": {
     "bulma": "^0.9.3",
     "dotenv": "^10.0.0",
-    "graphql": "^15.6.0",
-    "graphql-request": "^3.5.0",
-    "next": "^11.1.2",
-    "postgraphile": "^4.12.4",
+    "graphql": "^15.6.1",
+    "graphql-request": "^3.6.1",
+    "next": "^12.0.0",
+    "postgraphile": "^4.12.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "^1.42.1"
+    "sass": "^1.43.3"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
-    "@graphql-codegen/cli": "^2.2.0",
+    "@graphql-codegen/cli": "^2.2.1",
     "@graphql-codegen/introspection": "^2.1.0",
-    "@graphql-codegen/typescript": "^2.2.2",
-    "@graphql-codegen/typescript-graphql-request": "^4.1.4",
-    "@graphql-codegen/typescript-operations": "^2.1.6",
+    "@graphql-codegen/typescript": "^2.2.4",
+    "@graphql-codegen/typescript-graphql-request": "^4.1.6",
+    "@graphql-codegen/typescript-operations": "^2.1.8",
     "@types/gtag.js": "^0.0.7",
-    "@types/react": "^17.0.27",
+    "@types/react": "^17.0.33",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-graphql": "^4.0.0",
-    "next-sitemap": "^1.6.173",
+    "next-sitemap": "^1.6.192",
     "npm-check-updates": "^11.8.5",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.4.1",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   },
   "volta": {
-    "node": "16.10.0",
-    "npm": "7.24.1"
+    "node": "16.13.0",
+    "npm": "8.1.1"
   }
 }
